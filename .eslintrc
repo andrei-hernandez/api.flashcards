@@ -1,0 +1,39 @@
+{
+  "overrides": [
+    {
+      "files": [
+        "*.graphql"
+      ],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": [
+        "@graphql-eslint"
+      ],
+      "rules": {
+        
+      }
+    }
+  ],
+    "files": [
+      "*.graphql"
+    ],
+    "parser": "@graphql-eslint/eslint-plugin",
+    "plugins": [
+      "@graphql-eslint"
+    ],
+    "parserOptions": {
+      "schema": "./schema.graphql"
+    },
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "graphql"
+    ],
+    "eslint.options": {
+      "extentions": [
+        ".js",
+        ".graphql"
+      ]
+    }
+}

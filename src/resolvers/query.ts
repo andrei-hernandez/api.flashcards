@@ -1,19 +1,16 @@
 import { IResolvers } from "graphql-tools";
 
 // Los resolvers de las operaciones de consulta para devolver información
-const resolvers: IResolvers = {
-      Query: {
-        hello(): string {
-            return 'Hello world!!';
-        },
-        helloWithName(_: void, args: any): string {
-            return `Hello ${args.name}!!`;
-        },
-        helloToApolloGraphQLTemplate(): string {
-            return 'Hello to Apollo GraphQL Template!!';
-        }
-    }
+const queries: IResolvers = {
+	Query: {
+		accountLogIn(_: void, __: any): string {
+			return 'accountLogIn'
+		},
+		getFlashCards(_: void, __: any): string {
+			return 'getFlashCards'
+		}
+	}
 
 };
 
-export default resolvers;
+export default queries;

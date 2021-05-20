@@ -7,14 +7,13 @@ import schema from './schema/schema';
 import { ApolloServer } from 'apollo-server-express';
 import { createServer } from 'http';
 import expressPlayground from 'graphql-playground-middleware-express';
-import { dataSources } from './data';
+import './services/database';
 // Inicializamos la aplicación express
 
 const app = express();
 
 // Añadimos configuración de Cors y compression
 app.use((req, res, next) => { next(); }, cors({ maxAge: 84600 }));
-
 app.use(compression());
 
 // Inicializamos el servidor de Apollo
@@ -29,6 +28,8 @@ app.use('/', expressPlayground({
     endpoint: '/graphql'
 }
 ));
+
+//Iniciamos el servidor
 const PORT = 4000;
 
 const httpServer = createServer(app);

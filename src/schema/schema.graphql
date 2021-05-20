@@ -1,11 +1,35 @@
 #Here create your Schema
-type Query {
-  hello: String!
-  helloWithName(name: String!): String!
-  helloToApolloGraphQLTemplate: String!
-  list: [String]
+type Query {  
+  accountLogIn(userName: String, email: String, password: String!): credentialsFine!
+  getFlashCards(usernName: String!, isLoggedIn: Boolean!): [FCard]
 }
 
 type Mutation {
-  add(value: String!): [String]
+  createUser(user: UserInput): User!
 }
+
+input UserInput {
+  userName: String!
+  email: String!
+  password: String!
+}
+
+type FCard {
+  id: ID!
+  title: String!
+  content: String!
+  author: User!
+  createdAt: String!
+  editedAt: String
+}
+
+type User {
+  id: ID!
+  userName: String!
+  email: String!
+  password: String!
+  flashCards: [FCard!]
+}
+
+scalar credentialsFine
+scalar accountExists
