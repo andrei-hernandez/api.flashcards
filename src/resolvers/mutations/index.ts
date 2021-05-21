@@ -1,5 +1,4 @@
 import { IResolvers } from "graphql-tools";
-import { User } from '../../models/user';
 import { insertUser } from "./createUser";
 
 const mutations: IResolvers = {
@@ -18,8 +17,12 @@ const mutations: IResolvers = {
           password: '',
         }
       } else {
-        insertUser(newItemUser).catch((err: any) => console.log(err));
-        return newItemUser;
+        try {
+          insertUser(newItemUser).catch((err: any) => console.log(err));
+          return true;
+        } catch (err) {
+          return false;
+        }
       }
     }
   }

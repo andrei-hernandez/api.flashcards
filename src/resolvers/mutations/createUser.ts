@@ -5,8 +5,8 @@ export const insertUser = async (NewItemUser: User): Promise<void> => {
 
   const saltRounds = 10;
 
-  await genSalt(saltRounds, function (err, salt): void {
-    hash(NewItemUser.password, salt, function (err, hash) {
+  await genSalt(saltRounds, (err, salt): void => {
+    hash(NewItemUser.password, salt, (err, hash): void => {
       const encPass = hash.toString();
 
       let newUser = new UserMDB({
@@ -22,4 +22,6 @@ export const insertUser = async (NewItemUser: User): Promise<void> => {
     });
   });
 }
+
+
 
