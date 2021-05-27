@@ -1,11 +1,12 @@
 #Here create your Schema
 type Query {  
-  accountLogIn(userName: String, email: String, password: String!): credentialsFine!
-  getFlashCards(usernName: String!, isLoggedIn: Boolean!): [FCard]
+  accountLogIn(user: LogInInput!): SessionInfo!
+  getFlashCards(usernName: String!, isLoggedIn: Boolean!): [FCard!]!
 }
 
 type Mutation {
-  createUser(user: UserInput): accountExists!
+  createUser(user: UserInput!): accountExists!
+  createFCard(fcard: FcardInput): fcardExists!
 }
 
 input UserInput {
@@ -14,13 +15,24 @@ input UserInput {
   password: String!
 }
 
+input LogInInput {
+  email: String!
+  password: String!
+}
+
+input FcardInput {
+  title: String!
+  content: String!
+  token: String!
+}
+
 type FCard {
   id: ID!
   title: String!
   content: String!
   author: User!
   createdAt: String!
-  editedAt: String
+  updatedAt: String!
 }
 
 type User {
@@ -28,8 +40,14 @@ type User {
   userName: String!
   email: String!
   password: String!
-  flashCards: [FCard!]
+  createdAt: String!
+  updatedAt: String!
 }
 
-scalar credentialsFine
+type SessionInfo {
+  userId: ID!
+  token: String!
+  tokenExpiration: Int!
+}
 scalar accountExists
+scalar fcardExists

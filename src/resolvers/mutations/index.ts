@@ -1,9 +1,10 @@
 import { IResolvers } from "graphql-tools";
+import { insertFCard } from "./createFlashCard";
 import { insertUser } from "./createUser";
 
 const mutations: IResolvers = {
   Mutation: {
-    createUser(_: void, { user }) {
+    createUser: async (_: void, { user }) => {
       const newItemUser = {
         userName: user.userName,
         email: user.email,
@@ -18,7 +19,27 @@ const mutations: IResolvers = {
         }
       } else {
         try {
-          insertUser(newItemUser).catch((err: any) => console.log(err));
+          await insertUser(newItemUser).catch((err: any) => console.log(err));
+          return true;
+        } catch (err) {
+          return false;
+        }
+      }
+    },
+    createFCard: async (_: void, { fcard }) => {
+      const newItemFCard = {
+        title: fcard.title,
+        content: fcard.content,
+        token: fcard.token
+      }
+      if (newItemFCard.token === undefined) {
+        return false;
+      }
+      if (newItemFCard.title === undefined && newItemFCard.content === undefined) {
+        return false;
+      } else {
+        try {
+          await insertFCard(newItemFCard).catch((err: any) => console.log(err));
           return true;
         } catch (err) {
           return false;

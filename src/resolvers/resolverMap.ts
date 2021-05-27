@@ -1,5 +1,5 @@
 import { IResolvers } from 'graphql-tools';
-import queries from './query';
+import queries from './queries/query';
 import type from './type';
 import mutations from './mutations';
 
