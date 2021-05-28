@@ -1,63 +1,71 @@
-#Here create your Schema
-type Query {  
-  accountLogIn(user: LogInInput!): SessionInfo!
-  getFlashCards(token: String!): [FCard!]!
+# Here create your Schema
+type Query {
+	accountLogIn(user: LogInInput!): SessionInfo!
+	getFlashCards(token: String!): [FCard!]!
 }
 
 type Mutation {
-  createUser(user: UserInput!): accountExists!
-  createFCard(fcard: FcardInput): fcardExists!
-  editFCard(fcard: FCardUpdateInput): fcardHasEdited!
+	createUser(user: UserInput!): accountExists!
+	createFCard(fcard: FcardInput): fcardExists!
+	editFCard(fcard: FCardUpdateInput): fcardHasEdited!
+	deleteFCard(fcard: FCardDeleteInput): fcardHasDeleted!
 }
 
 input UserInput {
-  userName: String!
-  email: String!
-  password: String!
+	userName: String!
+	email: String!
+	password: String!
 }
 
 input LogInInput {
-  email: String!
-  password: String!
+	email: String!
+	password: String!
 }
 
 input FcardInput {
-  title: String!
-  content: String!
-  token: String!
+	title: String!
+	content: String!
+	token: String!
 }
 
 input FCardUpdateInput {
-  _id: ID!
-  token: String!
-  title: String!
-  content: String!
+	_id: ID!
+	token: String!
+	title: String!
+	content: String!
+}
+
+input FCardDeleteInput {
+	_id: ID!
+	token: String!
 }
 
 type FCard {
-  id: ID!
-  title: String!
-  content: String!
-  author: userEmail!
-  createdAt: String!
-  updatedAt: String!
+	id: ID!
+	title: String!
+	content: String!
+	author: userEmail!
+	createdAt: String!
+	updatedAt: String!
 }
 
 type User {
-  id: ID!
-  userName: String!
-  email: String!
-  password: String!
-  createdAt: String!
-  updatedAt: String!
+	id: ID!
+	userName: String!
+	email: String!
+	password: String!
+	createdAt: String!
+	updatedAt: String!
 }
 
 type SessionInfo {
-  userId: ID!
-  token: String!
-  tokenExpiration: Int!
+	userId: ID!
+	token: String!
+	tokenExpiration: Int!
 }
+
 scalar accountExists
 scalar fcardExists
 scalar userEmail
 scalar fcardHasEdited
+scalar fcardHasDeleted
