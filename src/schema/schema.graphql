@@ -7,6 +7,7 @@ type Query {
 type Mutation {
   createUser(user: UserInput!): accountExists!
   createFCard(fcard: FcardInput): fcardExists!
+  editFCard(fcard: FCardUpdateInput): fcardHasEdited!
 }
 
 input UserInput {
@@ -24,6 +25,13 @@ input FcardInput {
   title: String!
   content: String!
   token: String!
+}
+
+input FCardUpdateInput {
+  _id: ID!
+  token: String!
+  title: String!
+  content: String!
 }
 
 type FCard {
@@ -52,3 +60,4 @@ type SessionInfo {
 scalar accountExists
 scalar fcardExists
 scalar userEmail
+scalar fcardHasEdited

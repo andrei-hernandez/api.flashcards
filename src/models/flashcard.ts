@@ -15,6 +15,13 @@ export interface FCardInput {
   token: string;
 }
 
+export interface FCardUpdateInput {
+  _id: string;
+  token: string;
+  title: string;
+  content: string;
+}
+
 const FCardSchema = new Schema<FCard>(
   {
     title: { type: String, required: true },

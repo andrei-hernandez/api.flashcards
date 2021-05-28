@@ -1,6 +1,7 @@
 import { IResolvers } from "graphql-tools";
 import { insertFCard } from "./createFlashCard";
 import { insertUser } from "./createUser";
+import { editFCard } from "./editFlashCard";
 
 const mutations: IResolvers = {
   Mutation: {
@@ -45,6 +46,13 @@ const mutations: IResolvers = {
           return false;
         }
       }
+    },
+    editFCard: async (_: void, { fcard }): Promise<boolean> => {
+      const edit = await editFCard(fcard);
+      if (!edit) {
+        return false;
+      }
+      return true;
     }
   }
 }
