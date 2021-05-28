@@ -1,7 +1,7 @@
 #Here create your Schema
 type Query {  
   accountLogIn(user: LogInInput!): SessionInfo!
-  getFlashCards(usernName: String!, isLoggedIn: Boolean!): [FCard!]!
+  getFlashCards(token: String!): [FCard!]!
 }
 
 type Mutation {
@@ -30,7 +30,7 @@ type FCard {
   id: ID!
   title: String!
   content: String!
-  author: User!
+  author: userEmail!
   createdAt: String!
   updatedAt: String!
 }
@@ -51,3 +51,4 @@ type SessionInfo {
 }
 scalar accountExists
 scalar fcardExists
+scalar userEmail

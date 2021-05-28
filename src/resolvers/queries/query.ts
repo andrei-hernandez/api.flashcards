@@ -2,6 +2,8 @@ import { IResolvers } from "graphql-tools";
 import { sessionData, UserMDB } from "../../models/user";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
+import { FCard, FCardMDB } from "../../models/flashcard";
+import { decodeToken } from "../../auth/is-auth";
 
 // Los resolvers de las operaciones de consulta para devolver información
 const queries: IResolvers = {
@@ -23,9 +25,14 @@ const queries: IResolvers = {
 			// @ts-ignore: Object is possibly 'null'.
 			return { userId: User._id, token: token, tokenExpiration: 1 }
 		},
-		getFlashCards(_: void, __: any): string {
-			return 'getFlashCards'
-		}
+		getFlashCards: async (_: void, { token }): Promise<any> => {
+			const userS = decodeToken(token);
+			const uEmail = userS?.email;
+			console.log(uEmail);
+			const results = await FCardMDB.find({ author: `${uEmail}` });
+			console.log(results);
+			return results;
+		},
 	}
 
 };
