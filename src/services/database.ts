@@ -1,6 +1,9 @@
 import { connect } from 'mongoose';
+import * as dotenv from 'dotenv';
 
-const mURI: string = 'mongodb+srv://googleClousVPS:huevos2810@cluster0.pvgoq.mongodb.net/flashcard?retryWrites=true&w=majority';
+dotenv.config();
+
+const mURI: string = `${process.env.MONGODB_URI}`;
 
 connect(mURI, {
   useNewUrlParser: true,
