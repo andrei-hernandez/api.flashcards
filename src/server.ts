@@ -13,7 +13,7 @@ import './services/database';
 const app = express();
 
 // Añadimos configuración de Cors y compression
-app.use((req, res, next) => { next(); }, cors({ maxAge: 84600 }));
+app.use(cors());
 app.use(compression());
 
 // Inicializamos el servidor de Apollo
@@ -30,7 +30,7 @@ app.use('/', expressPlayground({
 ));
 
 //Iniciamos el servidor
-const PORT = 4000;
+const PORT = 8000;
 
 const httpServer = createServer(app);
 
