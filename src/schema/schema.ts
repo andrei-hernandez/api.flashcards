@@ -10,3 +10,7 @@ const schema: GraphQLSchema = makeExecutableSchema({
 });
 
 export default schema;
+
+
+//here imports the typedefs is a skeleton from the api grapqhl`
+//resolvers is an explicit name for the behaviour of the grapqhl queries

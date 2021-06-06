@@ -22,7 +22,14 @@ export interface FCardUpdateInput {
   content: string;
 }
 
-const FCardSchema = new Schema<FCard>(
+export interface FCardGetOneInput {
+  _id: string;
+  token: string;
+}
+
+//interfaces for the flash cards data
+
+const FCardSchema = new Schema<FCard>( //creates the mongoose schema
   {
     title: { type: String, required: true },
     content: { type: String, required: true },
@@ -34,4 +41,4 @@ const FCardSchema = new Schema<FCard>(
   }
 );
 
-export const FCardMDB = model<FCard>('fcard', FCardSchema);
+export const FCardMDB = model<FCard>('fcard', FCardSchema); //creates the mongoose document model for the flashcards using the flashcards mongoose schema

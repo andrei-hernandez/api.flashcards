@@ -13,3 +13,4 @@ export const deleteFCard = async (fcard: FCardUpdateInput): Promise<boolean> => 
   }
   return true;
 }
+//basically woks same at the create mutation method, so here find with the id was provided and... delete it

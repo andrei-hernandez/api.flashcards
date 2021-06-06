@@ -16,6 +16,9 @@ export interface UserLogin {
   password: string;
 }
 
+//interfaces to type the user data
+
+//create the schema fr the user in the database
 const userSchema = new Schema<User>(
   {
     userName: { type: String, required: true },
@@ -24,8 +27,8 @@ const userSchema = new Schema<User>(
   },
   {
     versionKey: false,
-    timestamps: true,
+    timestamps: true,//store the createdAt and updatedAt fields in a doucument
   }
 );
 
-export const UserMDB = model<User>('user', userSchema);
+export const UserMDB = model<User>('user', userSchema); //create a mongoose document model for users using the userSchema 

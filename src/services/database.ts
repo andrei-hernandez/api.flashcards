@@ -12,3 +12,6 @@ connect(mURI, {
 })
   .then((db) => console.log("db is connected"))
   .catch((err) => console.error(err));
+
+
+  //connection for mongodb database cluster

@@ -2,6 +2,7 @@
 type Query {
 	accountLogIn(user: LogInInput!): SessionInfo!
 	getFlashCards(token: String!): [FCard!]!
+	getOneFlashCard(fcard: OneFlashCard!): FCard!
 }
 
 type Mutation {
@@ -9,6 +10,11 @@ type Mutation {
 	createFCard(fcard: FcardInput): fcardExists!
 	editFCard(fcard: FCardUpdateInput): fcardHasEdited!
 	deleteFCard(fcard: FCardDeleteInput): fcardHasDeleted!
+}
+
+input OneFlashCard {
+	_id: ID!
+	token: String!
 }
 
 input UserInput {

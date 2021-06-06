@@ -5,3 +5,6 @@ export const decodeToken = (token: string) => {
   decodedToken = verify(token, 'somesupersecretkey');
   return decodedToken;
 }
+
+//aaaaaa this decode the token
+//ignore the "somesupersecretkey"
