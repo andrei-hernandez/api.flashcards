@@ -1,7 +1,12 @@
-import { User, UserMDB } from '../../models/user';
+import { accountCreationData, User, UserMDB } from '../../models/user';
 import { genSalt, hash } from 'bcrypt';
 
-export const insertUser = async (NewItemUser: User): Promise<void> => {
+export const insertUser = async (NewItemUser: User): Promise<accountCreationData> => {
+
+  const IfAccountExists = await UserMDB.findOne({ email: `${NewItemUser.email}` }); //calls the mongoose model for a user to find the user email provided
+  if (IfAccountExists) {
+    return { hasCreated: false, err: { errorCode: 3, errorDesc: "Account Exists" } }
+  }
 
   const saltRounds = 10;//store the rounds to encrypt the password
 
@@ -21,6 +26,7 @@ export const insertUser = async (NewItemUser: User): Promise<void> => {
       });
     });
   });
+  return { hasCreated: true }
 }
 
 

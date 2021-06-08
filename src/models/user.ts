@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { Error } from './error';
 export interface User {
   userName: string;
   email: string;
@@ -9,11 +10,17 @@ export interface sessionData {
   userId: string;
   token: any;
   tokenExpiration: number;
+  err?: Error;
 }
 
 export interface UserLogin {
   email: string;
   password: string;
+}
+
+export interface accountCreationData {
+  hasCreated: boolean;
+  err?: Error
 }
 
 //interfaces to type the user data

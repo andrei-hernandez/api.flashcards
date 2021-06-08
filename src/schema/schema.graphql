@@ -6,10 +6,10 @@ type Query {
 }
 
 type Mutation {
-	createUser(user: UserInput!): accountExists!
-	createFCard(fcard: FcardInput): fcardExists!
-	editFCard(fcard: FCardUpdateInput): fcardHasEdited!
-	deleteFCard(fcard: FCardDeleteInput): fcardHasDeleted!
+	createUser(user: UserInput!): accountCreationData!
+	createFCard(fcard: FcardInput): fcardCreationData!
+	editFCard(fcard: FCardUpdateInput): fcardEditionData!
+	deleteFCard(fcard: FCardDeleteInput): fcardDeletionData!
 }
 
 input OneFlashCard {
@@ -68,10 +68,32 @@ type SessionInfo {
 	userId: ID!
 	token: String!
 	tokenExpiration: Int!
+	err: Error
 }
 
-scalar accountExists
-scalar fcardExists
+type accountCreationData {
+  hasCreated: Boolean!
+  err: Error
+}
+
+type fcardEditionData {
+	FCardHasEdited: Boolean!
+	err: Error
+}
+
+type fcardCreationData {
+  FCardHasCreated: Boolean!
+  err: Error
+}
+
+type fcardDeletionData {
+  FCardHasDeleted: Boolean!
+  err: Error
+}
+
+type Error {
+	errorCode: Int!
+	errorDesc: String!
+}
+
 scalar userEmail
-scalar fcardHasEdited
-scalar fcardHasDeleted

@@ -1,4 +1,6 @@
 import { IResolvers } from "graphql-tools";
+import { FCardCreationData, FCardDeletionData, FCardEditionData } from "../../models/flashcard";
+import { accountCreationData } from "../../models/user";
 import { insertFCard } from "./createFlashCard";
 import { insertUser } from "./createUser";
 import { deleteFCard } from "./deleteFlashCard";
@@ -6,64 +8,35 @@ import { editFCard } from "./editFlashCard";
 
 const mutations: IResolvers = {
   Mutation: {
-    createUser: async (_: void, { user }) => {// okay this verify if the data is correct
+    createUser: async (_: void, { user }): Promise<accountCreationData> => {// okay this verify if the data is correct
       const newItemUser = {
         userName: user.userName,
         email: user.email,
         password: user.password
       }
-
-      if (newItemUser === undefined) {
-        return {
-          userName: 'u dont fill the form, error',
-          email: '',
-          password: '',
-        }
-      } else {
-        try {//should be create a promise for this instead this trycatch , anyways
-          await insertUser(newItemUser).catch((err: any) => console.log(err)); //calls the method for inster a user and then return if is correct or no
-          return true;
-        } catch (err) {
-          return false;
-        }
-      }
+      const cAccount: accountCreationData = await insertUser(newItemUser); //calls the method for inster a user and then return if is correct or no
+      return cAccount;
     },
-    createFCard: async (_: void, { fcard }) => {//lol, this file does have a bit of congruence,
+    createFCard: async (_: void, { fcard }): Promise<FCardCreationData> => {//lol, this file does have a bit of congruence,
       const newItemFCard = { //creates a new objetc from the input
         title: fcard.title,
         content: fcard.content,
         token: fcard.token
       }
-      if (newItemFCard.token === undefined) {
-        return false;
-      } //validates if the token exists
-      if (newItemFCard.title === undefined && newItemFCard.content === undefined) { //validates if the object contains the necessary data; actually this should be removed
-        return false;
-      } else {
-        try {
-          await insertFCard(newItemFCard).catch((err: any) => console.log(err)); //calls the method for create a new card
-          return true;
-        } catch (err) {
-          return false;
-        }
-      }
+      const insertedCard: FCardCreationData = await insertFCard(newItemFCard); //calls the method for create a new card
+      return insertedCard;
     },
-    editFCard: async (_: void, { fcard }): Promise<boolean> => { //oh, the past Andi reads my mind hahahahaha
-      const edit = await editFCard(fcard);//calls the edit card method and then store in _edit_ and then validate if is true or false, tha
-      if (!edit) {
-        return false;
-      }
-      return true;
+    editFCard: async (_: void, { fcard }): Promise<FCardEditionData> => { //oh, the past Andi reads my mind hahahahaha
+      const editionFCard: FCardEditionData = await editFCard(fcard);//calls the edit card method and then store in _edit_ and then validate if is true or false, tha
+      return editionFCard
     },
-    deleteFCard: async (_: void, { fcard }): Promise<boolean> => {// here so, calls the delete method and, woks really same
-      const edit = await deleteFCard(fcard);
-      if (!edit) {
-        return false;
-      }
-      return true;
+    deleteFCard: async (_: void, { fcard }): Promise<FCardDeletionData> => {
+      const deleteFard: FCardDeletionData = await deleteFCard(fcard);
+      return deleteFard;
     }
   }
 }
+
 
 export default mutations;
 

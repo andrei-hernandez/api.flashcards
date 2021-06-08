@@ -33,7 +33,7 @@ app.use('/', expressPlayground({
 //graphql use a single endpoint
 
 //Iniciamos el servidor
-const PORT = 8000;
+const PORT = process.env.PORT || 4000;
 
 const httpServer = createServer(app);
 

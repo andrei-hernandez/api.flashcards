@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { Error } from './error';
 
 export interface FCard {
   id: string;
@@ -27,6 +28,20 @@ export interface FCardGetOneInput {
   token: string;
 }
 
+export interface FCardCreationData {
+  FCardHasCreated: boolean;
+  err?: Error;
+}
+
+export interface FCardEditionData {
+  FCardHasEdited: boolean;
+  err?: Error;
+}
+
+export interface FCardDeletionData {
+  FCardHasDeleted: boolean;
+  err?: Error;
+}
 //interfaces for the flash cards data
 
 const FCardSchema = new Schema<FCard>( //creates the mongoose schema
