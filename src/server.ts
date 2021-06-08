@@ -19,7 +19,7 @@ app.use(compression());
 // Inicializamos el servidor de Apollo
 const server = new ApolloServer({
     schema: schema, //here import the schema definition language, the base for grapqhql api
-    introspection: true, // Necesario
+    introspection: false, // Necesario
 });
 
 //config express playground
